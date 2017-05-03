@@ -1,0 +1,93 @@
+//
+//  LMThirdParty.pch
+//  LMThirdParty
+//
+//  Created by iOSDev on 17/5/3.
+//  Copyright © 2017年 linhongmin. All rights reserved.
+//
+
+#ifndef LMThirdParty_pch
+#define LMThirdParty_pch
+#
+
+#ifdef DEBUG
+#define LMLog(FORMAT,...) fprintf(stderr, "%s:%d行 %s \n", [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+
+#else
+#define LMLog(FORMAT, ...) nil
+#endif
+
+#ifdef __OBJC__
+
+/**  系统库  */
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+
+/******************************第三方库***************************/
+#import <Masonry.h>
+#import <MJRefresh/MJRefresh.h>
+#import <AFNetworking.h>
+#import <SDWebImage/UIView+WebCache.h>
+
+
+/******************************自定义类库**************************/
+#import "UIImage+LMAdd.h"
+
+
+
+
+#import "LMNetworkManager.h"
+
+
+
+
+/******************************常量******************************/
+#import "LMConst.h"
+
+
+
+
+/******************************接口******************************/
+#import "LMConnect.h"
+
+
+
+
+
+/******************************屏幕相关***************************/
+/** 屏幕比例适配 以iPhone6位基准*/
+#define iPhone4 ([UIScreen mainScreen].bounds.size.height == 480)
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kWidth(R) (R)*(kScreenWidth)/375
+#define kHeight(R) (iPhone4?((R)*(kScreenHeight)/480):((R)*(kScreenHeight)/667))
+#define font(R) (R)*(kScreenWidth)/375
+/**  尺寸  */
+
+#define kDevice_Is_iPhone4S ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+#define kDevice_Is_iPhone5s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+
+/******************************自定义工具**************************/
+
+
+
+
+
+
+/******************************数据库*****************************/
+
+
+
+
+
+
+/******************************强弱引用*****************************/
+#define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
+#define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+#endif
+
+#endif /* LMThirdParty_pch */
